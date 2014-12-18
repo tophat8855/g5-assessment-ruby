@@ -28,9 +28,9 @@ Dir.glob(all_the_poems).each do |file|
   array_of_poems << poem_data_hash
 end
 
-merge_hashes = array_of_poems.each_with_object({}) do |poem_data, hash|
-  key,value = poem_data.shift
-  (hash[key] ||= []) << value
+merge_hashes = array_of_poems.each_with_object({}) do |author, hash|
+  key,value = author.shift
+  (hash[key] ||= []) << value #this is where the unruly array is being made
 end
 
-p merge_hashes
+puts merge_hashes
