@@ -25,7 +25,7 @@ Dir.glob(all_the_poems).each do |file|
 
   poem_line_count = number_of_lines_in_file - number_of_lines_in_header - empty_line_counter
 
-  poem_data_hash = { poem[1].gsub("\n","") => {poem[0].gsub("\n","") => {verses: empty_line_counter, lines: poem_line_count}}}
+  poem_data_hash = { poem[1].gsub("\n","") => { poem[0].gsub("\n","") => { verses: empty_line_counter, lines: poem_line_count } } }
 
   array_of_poems << poem_data_hash
 end
