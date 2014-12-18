@@ -9,13 +9,11 @@
 
 datadirs = File.join("**", "data", "**", "*.txt")
 
-file = Dir.glob(datadirs)[6]
+file = Dir.glob(datadirs)[0]
 
 poem = IO.readlines(file)
 
 number_of_lines_in_file = IO.readlines(file).count
-puts number_of_lines_in_file
-
 
 #this will count the number of empty lines in the file
 #number of empty lines = number of verses
@@ -29,6 +27,6 @@ end
 poem_line_count = number_of_lines_in_file - 2 - empty_line_counter
 
 
-poem_data_hash = { poem[1] => {poem[0] => {verses: empty_line_counter, lines: poem_line_count}}}
+poem_data_hash = { poem[1].gsub("\n","") => {poem[0].gsub("\n","") => {verses: empty_line_counter, lines: poem_line_count}}}
 
 puts poem_data_hash
