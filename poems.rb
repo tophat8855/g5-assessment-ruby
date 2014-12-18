@@ -1,13 +1,13 @@
-# go through each file
-# parse them by lines (look up how to parse .txt file)
-# make a hash
-# second line is key to hash
-# first line (aka title) is value of the second and is key to hash that
-# points to hash of verse and line amounts (need to count those in an each loop).
+# I have the author key pointing to an array of the hashes representing
+# each poem attributed to them. I don't think that's supposed to be an
+# array, so I need to figure out how to get that to disappear without
+# messing everything up.
 
-datadirs = File.join("**", "data", "**", "*.txt")
+all_the_poems = File.join("**", "data", "**", "*.txt")
 
-Dir.glob(datadirs).each do |file|
+array_of_poems = []
+
+Dir.glob(all_the_poems).each do |file|
   poem = IO.readlines(file)
 
   number_of_lines_in_file = IO.readlines(file).count
@@ -25,5 +25,12 @@ Dir.glob(datadirs).each do |file|
 
   poem_data_hash = { poem[1].gsub("\n","") => {poem[0].gsub("\n","") => {verses: empty_line_counter, lines: poem_line_count}}}
 
-  puts poem_data_hash
+  array_of_poems << poem_data_hash
 end
+
+merge_hashes = array_of_poems.each_with_object({}) do |poem_data, hash|
+  key,value = poem_data.shift
+  (hash[key] ||= []) << value
+end
+
+p merge_hashes
