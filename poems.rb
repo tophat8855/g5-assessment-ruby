@@ -12,8 +12,10 @@ Dir.glob(all_the_poems).each do |file|
 
   number_of_lines_in_file = IO.readlines(file).count
 
-  #this will count the number of empty lines in the file
-  #number of empty lines = number of verses
+  number_of_lines_in_header = 2 # these are the title and author lines
+
+  # this will count the number of empty lines in the file
+  # number of empty lines = number of verses
   empty_line_counter = 0
   poem.each do |line|
     if line == "\n"
@@ -21,7 +23,7 @@ Dir.glob(all_the_poems).each do |file|
     end
   end
 
-  poem_line_count = number_of_lines_in_file - 2 - empty_line_counter
+  poem_line_count = number_of_lines_in_file - number_of_lines_in_header - empty_line_counter
 
   poem_data_hash = { poem[1].gsub("\n","") => {poem[0].gsub("\n","") => {verses: empty_line_counter, lines: poem_line_count}}}
 
