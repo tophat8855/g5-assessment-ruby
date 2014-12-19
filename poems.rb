@@ -1,8 +1,3 @@
-# I have the author key pointing to an array of the hashes representing
-# each poem attributed to them. I don't think that's supposed to be an
-# array, so I need to figure out how to get that to disappear without
-# messing everything up.
-
 all_the_poems = File.join("**", "data", "**", "*.txt")
 
 hash_of_poems = {}
@@ -13,7 +8,7 @@ Dir.glob(all_the_poems).each do |file|
 
   number_of_lines_in_file = IO.readlines(file).count
 
-  number_of_lines_in_header = 2 # these are the title and author lines
+  number_of_lines_in_header = 2
 
   # this will count the number of empty lines in the file
   # number of empty lines = number of verses
@@ -38,10 +33,5 @@ Dir.glob(all_the_poems).each do |file|
 
   hash_of_poems
 end
-
-# merge_hashes = array_of_poems.each_with_object({}) do |author, hash|
-#   key,value = author.shift
-#   (hash[key] ||= []) << value #this is where the unruly array is being made
-# end
 
 puts hash_of_poems
